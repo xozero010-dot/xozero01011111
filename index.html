@@ -20,26 +20,24 @@
             padding: 0;
         }
 
-	        body {
-	            font-family: 'Cairo', sans-serif;
-	            margin: 0;
-	            /* إزالة padding: 60px 20px; */
-	            display: flex;
-	            flex-direction: column; /* ترتيب العناصر عمودياً */
-	            justify-content: space-between; /* توزيع المساحة بين العناصر */
-	            min-height: 100vh;
-            /* خلفية زرقاء غامقة وعميقة */
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
             background: #0f0c29;
             background: -webkit-linear-gradient(to top, #24243e, #302b63, #0f0c29);
             background: linear-gradient(to top, #24243e, #302b63, #0f0c29);
-            color: #e0e0e0; /* لون نص فاتح للتباين */
-            overflow-x: hidden; /* لمنع ظهور أي أشرطة تمرير بسبب المؤثرات */
+            color: #e0e0e0;
+            overflow-x: hidden;
             position: relative;
         }
 
         /* --- Magical Particle Effect Container --- */
         #particles-js {
-            position: fixed; /* استخدام fixed لتغطية الشاشة بالكامل خلف المحتوى */
+            position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
@@ -47,17 +45,17 @@
             z-index: 0;
         }
 
-        /* --- Main Container (to be above particles) --- */
-	        .main-container {
-	            width: 100%;
-	            max-width: 600px; /* عرض مناسب للتخطيط العمودي */
-	            text-align: center;
-	            position: relative;
-	            z-index: 1;
-	            margin: 0 auto; /* توسيط الحاوية */
-	            padding: 60px 20px; /* إعادة إضافة padding هنا */
-	            flex-grow: 1; /* السماح للحاوية بالنمو لملء المساحة المتاحة */
-	        }
+        /* --- Main Container --- */
+        .main-container {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            margin: 0 auto;
+            padding: 60px 20px;
+            flex-grow: 1;
+        }
 
         /* --- Vertical Logo --- */
         .logo-container {
@@ -66,19 +64,18 @@
 
         .logo {
             font-weight: 900;
-            color: #0d0d0d; /* أسود حالك */
+            color: #0d0d0d;
             cursor: default;
             user-select: none;
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            line-height: 1; /* تقليل المسافة بين السطور */
-            /* ظل احترافي متعدد الطبقات */
+            line-height: 1;
             text-shadow: 
                 0px 4px 10px rgba(0, 0, 0, 0.5),
                 0px 8px 20px rgba(0, 0, 0, 0.3),
-                0px 0px 30px rgba(173, 216, 230, 0.1); /* ظل أزرق خفيف جداً */
+                0px 0px 30px rgba(173, 216, 230, 0.1);
             animation: text-flicker 8s linear infinite;
         }
 
@@ -87,10 +84,9 @@
         }
 
         .logo .zero {
-            font-size: 6rem; /* أصغر قليلاً */
+            font-size: 6rem;
         }
 
-        /* Glitch/Distortion Animation */
         @keyframes text-flicker {
             0%, 100% { text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5), 0px 8px 20px rgba(0, 0, 0, 0.3), 0px 0px 30px rgba(173, 216, 230, 0.1); }
             25% { text-shadow: 2px 2px 8px rgba(255, 0, 0, 0.3), -2px -2px 8px rgba(0, 255, 255, 0.3), 0px 0px 20px rgba(173, 216, 230, 0.2); }
@@ -101,16 +97,16 @@
         .logo-subtitle {
             font-size: 1.5rem;
             font-weight: 600;
-            color: #a7a4c4; /* لون متناسق مع الخلفية الغامقة */
-            margin-top: 20px; /* زيادة المسافة بعد الشعار */
+            color: #a7a4c4;
+            margin-top: 20px;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
         /* --- Vertical Test List --- */
         .test-list {
             display: flex;
-            flex-direction: column; /* ترتيب الأزرار عمودياً */
-            gap: 20px; /* المسافة بين الأزرار */
+            flex-direction: column;
+            gap: 20px;
         }
 
         /* --- Dark Glassmorphism Buttons --- */
@@ -121,31 +117,29 @@
             color: #e0e0e0;
             font-size: 1.5rem;
             font-weight: 700;
-            
-            background: rgba(255, 255, 255, 0.05); /* شفافية قليلة جداً */
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .glass-button:hover {
             background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px) scale(1.02); /* تعديل حركة المرور */
+            transform: translateY(-5px) scale(1.02);
             box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
         }
         
         .glass-button .emoji {
-            display: inline-block; /* جعل الإيموجي بجانب النص */
-            margin-left: 15px; /* مسافة بين الإيموجي والنص */
+            display: inline-block;
+            margin-left: 15px;
             vertical-align: middle;
         }
 
-        /* --- Modal (Popup) Styles for Dark Theme --- */
+        /* --- Modal Styles --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -192,23 +186,23 @@
         .modal-content a { color: #82aaff; text-decoration: none; font-weight: bold; }
         .close-btn { margin-top: 30px; padding: 10px 30px; background: rgba(255, 255, 255, 0.1); border: none; border-radius: 10px; color: #fff; font-size: 1rem; cursor: pointer; transition: background 0.3s ease; }
         .close-btn:hover { background: rgba(255, 255, 255, 0.2); }
-	
-	    </style>
-	</head>
-	<body>
+    </style>
+</head>
+<body>
     <div id="particles-js"></div>
 
     <div class="main-container">
-        
         <div class="logo-container">
             <div class="logo">
                 <span class="xo">xo</span>
-                <span class="zero">zero</span            <h1 class="logo-subtitle" style="margin-bottom: 60px;">اختبر نفسك مع xozero</h1>       </div>
-	        <div style="height: 40px;"></div> <!-- مسافة إضافية لحل مشكلة التداخل -->
+                <span class="zero">zero</span>
+            </div>
+            <h1 class="logo-subtitle" style="margin-bottom: 60px;">اختبر نفسك مع xozero</h1>
+        </div>
+        
+        <div style="height: 40px;"></div>
 
-        <!-- قائمة الاختبارات العمودية -->
         <div class="test-list">
-            <!-- الروابط هنا لا تؤدي إلى أي مكان حاليًا (href="#") -->
             <a href="h.html" class="glass-button"><span class="emoji">💖</span> اختبار الحب</a>
             <a href="a.html" class="glass-button"><span class="emoji">😂</span> اختبار الهبل</a>
             <a href="z.html" class="glass-button"><span class="emoji">💡</span> اختبار الذكاء</a>
@@ -218,10 +212,8 @@
             <a href="j.html" class="glass-button"><span class="emoji">😍</span> اختبار الجاذبية</a>
             <a href="#" id="contactBtn" class="glass-button"><span class="emoji">✉️</span> تواصل</a>
         </div>
-
     </div>
 
-    <!-- النافذة المنبثقة (Modal) للتواصل -->
     <div id="contactModal" class="modal-overlay">
         <div class="modal-content">
             <h2>معلومات التواصل</h2>
@@ -231,11 +223,9 @@
         </div>
     </div>
 
-    <!-- مكتبة المؤثرات السحرية (particles.js) -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <script>
-        // --- JavaScript لتشغيل المؤثرات السحرية ---
         particlesJS('particles-js', {
             "particles": {
                 "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
@@ -252,29 +242,24 @@
             "retina_detect": true
         });
 
-        // --- JavaScript للتحكم في نافذة التواصل المنبثقة ---
         const contactBtn = document.getElementById('contactBtn');
         const contactModal = document.getElementById('contactModal');
         const closeBtn = document.getElementById('closeBtn');
 
-        // فتح النافذة عند الضغط على زر التواصل
         contactBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // منع السلوك الافتراضي للرابط
+            e.preventDefault();
             contactModal.classList.add('active');
         });
 
-        // إغلاق النافذة عند الضغط على زر الإغلاق
         closeBtn.addEventListener('click', () => {
             contactModal.classList.remove('active');
         });
 
-        // إغلاق النافذة عند الضغط خارجها
         contactModal.addEventListener('click', (event) => {
             if (event.target === contactModal) {
                 contactModal.classList.remove('active');
             }
         });
-	    </script>
-
+    </script>
 </body>
 </html>
