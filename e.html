@@ -6,118 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>اختبار الشر</title>
     <style>
-        /* --- Global Styles & Fonts --- */
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
-
         :root {
             --dark-blue-bg: #0f0c29;
-            --gradient-start: #302b63;
-            --gradient-end: #24243e;
             --text-primary: #e0e0e0;
-            --text-secondary: #a7a4c4;
-            --accent-color: #f44336; /* لون أحمر ناري يناسب اختبار الشر */
-            --accent-dark: #fff;
+            --accent-color: #f44336;
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
-            --shadow-color: rgba(0, 0, 0, 0.37);
         }
-
-        /* --- Base Setup --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        
-        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Cairo', sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column; /* ترتيب العناصر عمودياً */
-            justify-content: space-between; /* توزيع المساحة بين العناصر */
             min-height: 100vh;
-            /* خلفية زرقاء غامقة وعميقة */
-            background: #0f0c29;
-            background: -webkit-linear-gradient(to top, #24243e, #302b63, #0f0c29);
             background: linear-gradient(to top, #24243e, #302b63, #0f0c29);
-            color: #e0e0e0; /* لون نص فاتح للتباين */
-            overflow-x: hidden; /* لمنع ظهور أي أشرطة تمرير بسبب المؤثرات */
+            color: var(--text-primary);
+            overflow-x: hidden;
             position: relative;
         }
-        
-        
-
-        /* --- Magical Particle Effect Container --- */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
-
-        /* --- Main Test Container --- */
-        .test-wrapper {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 750px;
-        }
-
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; }
+        .test-wrapper { position: relative; z-index: 1; width: 100%; max-width: 750px; margin: 40px auto; padding: 0 20px; }
         .test-container {
             background: var(--glass-bg);
             border-radius: 20px;
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             padding: 30px 40px;
-            box-shadow: 0 8px 32px 0 var(--shadow-color);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
         }
-
-        /* Hide/Show Logic */
-        .hidden {
-            display: none;
-        }
-
-        /* --- Test Header --- */
-        .test-header {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-        .test-header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            color: var(--accent-color);
-        }
-        .test-header p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-        }
-
-        /* --- Questions --- */
-        .question-block {
-            margin-bottom: 30px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid var(--glass-border);
-        }
-        .question-block:last-of-type {
-            border-bottom: none;
-        }
-        .question-text {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.7;
-        }
-        .choices {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+        .hidden { display: none; }
+        .test-header { text-align: center; margin-bottom: 35px; }
+        .test-header h1 { font-size: 2.8rem; color: var(--accent-color); }
+        .question-block { margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid var(--glass-border); }
+        .question-text { font-size: 1.25rem; font-weight: 600; margin-bottom: 20px; }
+        .choices { display: flex; flex-direction: column; gap: 15px; }
         .choices label {
             display: block;
             background: rgba(0, 0, 0, 0.2);
@@ -125,328 +46,179 @@
             border-radius: 12px;
             padding: 15px 20px;
             cursor: pointer;
-            transition: all 0.2s ease-in-out;
+            transition: 0.2s;
         }
-        .choices label:hover {
-            border-color: var(--accent-color);
-        }
-        .choices input[type="radio"] {
-            display: none;
-        }
-        .choices input:checked + label {
-            background: var(--accent-color);
-            color: var(--accent-dark);
-            border-color: var(--accent-color);
-            font-weight: bold;
-        }
-
-        /* --- Buttons --- */
+        .choices input[type="radio"] { display: none; }
+        .choices input:checked + label { background: var(--accent-color); color: #fff; font-weight: bold; }
         .glass-button {
-            display: block;
-            width: 100%;
-            padding: 20px;
-            margin-top: 20px;
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--accent-color);
-            color: var(--accent-dark);
-            border-radius: 15px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            display: block; width: 100%; padding: 20px; margin-top: 20px;
+            background: var(--accent-color); color: #fff; border-radius: 15px;
+            border: none; cursor: pointer; font-size: 1.5rem; font-weight: 700; text-align: center; text-decoration: none;
         }
-        .glass-button:hover {
-            background: #e53935;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px 0 rgba(244, 67, 54, 0.2);
-        }
-
-        /* --- Result Styles --- */
-        .result-container {
-            text-align: center;
-        }
-        .result-emoji {
-            font-size: 6rem;
-            margin: 20px 0;
-            animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        }
-        @keyframes pop-in {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .result-title {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--accent-color);
-        }
-        .result-description {
-            font-size: 1.4rem;
-            color: var(--text-primary);
-            margin-bottom: 30px;
-        }
-        .result-score {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-        }
+        .result-container { text-align: center; }
+        .result-emoji { font-size: 6rem; margin: 20px 0; }
+        .result-title { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 15px; }
     </style>
+</head>
 <body>
-
     <div id="particles-js"></div>
-
     <div class="test-wrapper">
-        <!-- حاوية الاختبار (الأسئلة) -->
         <div id="test-content" class="test-container">
             <div class="test-header">
                 <h1>😈 اختبار الشر</h1>
-                <p>جاوب بصراحة شديدة، عشان نعرف نسبة الشر اللي جواك، سواء كان شر حقيقي أو مجرد شوية "لذاذة"!</p>
+                <p>جاوب بصراحة عشان نعرف نسبة الشر اللي جواك!</p>
             </div>
             <form id="evil-test-form">
-                <!-- النقاط: 1=خيري, 2=هزلي/قليل الشر, 3=متوسط/مجرب, 4=شرير -->
                 <div class="question-block">
-                    <p class="question-text">1. لو كنت ماشي بسرعة وواحد قفل عليك الطريق فجأة، إيه رد فعلك؟</p>
+                    <p class="question-text">1. لو واحد قفل عليك الطريق فجأة، إيه رد فعلك؟</p>
                     <div class="choices">
-                        <input type="radio" id="q1a" name="q1" value="2"><label for="q1a">(أ) أضايق جداً وأضرب كلاكس واحد طويل وأقول "حسبي الله".</label>
-                        <input type="radio" id="q1b" name="q1" value="1"><label for="q1b">(ب) أسكت وأعدي الموضوع، وأقول لنفسي "كله بأجره".</label>
-                        <input type="radio" id="q1c" name="q1" value="4"><label for="q1c">(ج) أحاول أزحمه تاني بعربيتي عشان أخليه يحس بالغلط.</label>
-                        <input type="radio" id="q1d" name="q1" value="3"><label for="q1d">(د) أشاورله بإشارة واضحة تدل على غضبي، لكن أكمل طريقي.</label>
+                        <input type="radio" id="q1a" name="q1" value="2"><label for="q1a">(أ) أضايق وأقول حسبي الله.</label>
+                        <input type="radio" id="q1b" name="q1" value="1"><label for="q1b">(ب) أسكت وأعدي الموضوع.</label>
+                        <input type="radio" id="q1c" name="q1" value="4"><label for="q1c">(ج) أحاول أزحمه تاني بعربيتي.</label>
+                        <input type="radio" id="q1d" name="q1" value="3"><label for="q1d">(د) أشاورله بإشارة غاضبة.</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <p class="question-text">2. لما بتكون بتاكل أحلى حاجة بتحبها، وجه حد طلب منك قطعة، هتعمل إيه؟</p>
+                    <p class="question-text">2. حد طلب منك قطعة من أكلك المفضل، هتعمل إيه؟</p>
                     <div class="choices">
-                        <input type="radio" id="q2a" name="q2" value="1"><label for="q2a">(أ) هقسمها بالتساوي أو أديله أكبر قطعة وأنا راضي.</label>
-                        <input type="radio" id="q2b" name="q2" value="2"><label for="q2b">(ب) هقول "لا طبعاً"، وأضحك وأقول "دي بتاعتي أنا لوحدي".</label>
-                        <input type="radio" id="q2c" name="q2" value="3"><label for="q2c">(ج) هسأله: "ليه بالذات بتاكل حاجتي؟" وأديله قطعة صغيرة جداً.</label>
-                        <input type="radio" id="q2d" name="q2" value="4"><label for="q2d">(د) هقوله: "اتفضل خد الطبق كله"، بس وأنا جوايا بموت من الغيظ.</label>
+                        <input type="radio" id="q2a" name="q2" value="1"><label for="q2a">(أ) أديله أكبر قطعة.</label>
+                        <input type="radio" id="q2b" name="q2" value="2"><label for="q2b">(ب) هقول لا دي بتاعتي.</label>
+                        <input type="radio" id="q2c" name="q2" value="3"><label for="q2c">(ج) أديله قطعة صغيرة جداً.</label>
+                        <input type="radio" id="q2d" name="q2" value="4"><label for="q2d">(د) أديله الطبق كله وأنا متغاظ.</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <p class="question-text">3. زميلك غاب يوم مهم، وطلب منك ماتقولش للمدير. هتعمل إيه؟</p>
+                    <p class="question-text">3. زميلك غاب وطلب منك ماتقولش للمدير. هتعمل إيه؟</p>
                     <div class="choices">
-                        <input type="radio" id="q3a" name="q3" value="2"><label for="q3a">(أ) هأكدله إن سره في بير ومش هقول أي حاجة.</label>
-                        <input type="radio" id="q3b" name="q3" value="1"><label for="q3b">(ب) هقول للمدير على طول عشان دي أمانة.</label>
-                        <input type="radio" id="q3c" name="q3" value="3"><label for="q3c">(ج) هقول للمدير، بس بعد ما أقول لزميلي إني هعمل كده.</label>
-                        <input type="radio" id="q3d" name="q3" value="4"><label for="q3d">(د) هقول للمدير، وهضيف حتة من عندي عشان الموضوع يبقى أخطر عليه.</label>
+                        <input type="radio" id="q3a" name="q3" value="2"><label for="q3a">(أ) سره في بير.</label>
+                        <input type="radio" id="q3b" name="q3" value="1"><label for="q3b">(ب) هقول للمدير فوراً.</label>
+                        <input type="radio" id="q3c" name="q3" value="3"><label for="q3c">(ج) هقول للمدير بعد ما أعرفه.</label>
+                        <input type="radio" id="q3d" name="q3" value="4"><label for="q3d">(د) هقول للمدير وأزود من عندي.</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <p class="question-text">4. لما بتكون بتلعب لعبة منافسة، إيه هدفك الأساسي؟</p>
+                    <p class="question-text">4. لما بتلعب لعبة منافسة، إيه هدفك؟</p>
                     <div class="choices">
-                        <input type="radio" id="q4a" name="q4" value="1"><label for="q4a">(أ) إني أستمتع باللعب وأقضي وقت حلو.</label>
-                        <input type="radio" id="q4b" name="q4" value="2"><label for="q4b">(ب) إني أحاول أكسب بمهارة وشرف.</label>
-                        <input type="radio" id="q4c" name="q4" value="3"><label for="q4c">(ج) إني أكسب بأي طريقة ممكنة، حتى لو مش عادلة.</label>
-                        <input type="radio" id="q4d" name="q4" value="4"><label for="q4d">(د) إني أزهق كل اللي بيلعبوا معايا وأخليهم يكرهوا اللعبة.</label>
+                        <input type="radio" id="q4a" name="q4" value="1"><label for="q4a">(أ) أستمتع بالوقت.</label>
+                        <input type="radio" id="q4b" name="q4" value="2"><label for="q4b">(ب) أكسب بشرف.</label>
+                        <input type="radio" id="q4c" name="q4" value="3"><label for="q4c">(ج) أكسب بأي طريقة.</label>
+                        <input type="radio" id="q4d" name="q4" value="4"><label for="q4d">(د) أزهق المنافسين.</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <p class="question-text">5. لو لقيت محفظة فلوس في مكان عام، إيه أول حاجة بتفكر تعملها؟</p>
+                    <p class="question-text">5. لو لقيت محفظة فلوس، هتعمل إيه؟</p>
                     <div class="choices">
-                        <input type="radio" id="q5a" name="q5" value="1"><label for="q5a">(أ) أدور على أي هوية وأحاول أوصل لصاحبها فوراً.</label>
-                        <input type="radio" id="q5b" name="q5" value="4"><label for="q5b">(ب) أخد الفلوس وأرمي المحفظة، وأقول: "رزق وجالي".</label>
-                        <input type="radio" id="q5c" name="q5" value="2"><label for="q5c">(ج) أسيب المحفظة مكانها وأقول: "أنا مش ناقص وجع دماغ".</label>
-                        <input type="radio" id="q5d" name="q5" value="3"><label for="q5d">(د) أخد المحفظة، وأستنى أسبوع، ولو محدش سأل عليها أتصرف.</label>
+                        <input type="radio" id="q5a" name="q5" value="1"><label for="q5a">(أ) أوصلها لصاحبها فوراً.</label>
+                        <input type="radio" id="q5b" name="q5" value="4"><label for="q5b">(ب) أخد الفلوس وأرميها.</label>
+                        <input type="radio" id="q5c" name="q5" value="2"><label for="q5c">(ج) أسيبها مكانها.</label>
+                        <input type="radio" id="q5d" name="q5" value="3"><label for="q5d">(د) أستنى لو محدش سأل أخدها.</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <p class="question-text">6. إيه رأيك في الناس اللي بتحاول تطلع إشاعات عن ناس تانية؟</p>
+                    <p class="question-text">6. إيه رأيك في الإشاعات؟</p>
                     <div class="choices">
-                        <input type="radio" id="q6a" name="q6" value="1"><label for="q6a">(أ) تصرف غير أخلاقي ولازم الإشاعة تتوقف.</label>
-                        <input type="radio" id="q6b" name="q6" value="2"><label for="q6b">(ب) بحس إنها طريقة لطيفة عشان أضحك على اللي بيصدقها.</label>
-                        <input type="radio" id="q6c" name="q6" value="3"><label for="q6c">(ج) بشوف إنه شيء طبيعي ولازم كل واحد يحمي ظهره.</label>
-                        <input type="radio" id="q6d" name="q6" value="4"><label for="q6d">(د) بشارك في الإشاعة وأزود عليها تفاصيل عشان تبقى مثيرة أكتر.</label>
+                        <input type="radio" id="q6a" name="q6" value="1"><label for="q6a">(أ) تصرف سيء جداً.</label>
+                        <input type="radio" id="q6b" name="q6" value="2"><label for="q6b">(ب) بسمعها بس مش بنشرها.</label>
+                        <input type="radio" id="q6c" name="q6" value="3"><label for="q6c">(ج) بنشرها لو الشخص يستاهل.</label>
+                        <input type="radio" id="q6d" name="q6" value="4"><label for="q6d">(د) أنا اللي بطلعها أصلاً.</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <p class="question-text">7. لو بتتصور سيلفي، ولقيت واحد وراك شكله مضحك، هتعمل إيه؟</p>
+                    <p class="question-text">7. لو حد وقع قدامك، هتعمل إيه؟</p>
                     <div class="choices">
-                        <input type="radio" id="q7a" name="q7" value="1"><label for="q7a">(أ) همسح الصورة عشان ميضايقش.</label>
-                        <input type="radio" id="q7b" name="q7" value="2"><label for="q7b">(ب) هقص صورته خالص وأنزل صورتي لوحدي.</label>
-                        <input type="radio" id="q7c" name="q7" value="3"><label for="q7c">(ج) هنزل الصورة زي ما هي عشان الضحك بيبقى أحلى.</label>
-                        <input type="radio" id="q7d" name="q7" value="4"><label for="q7d">(د) هنزل الصورة وأعمل عليها دايرة حمرا وأكتب: "مين ده يا جدعان؟".</label>
+                        <input type="radio" id="q7a" name="q7" value="1"><label for="q7a">(أ) أساعده يقوم فوراً.</label>
+                        <input type="radio" id="q7b" name="q7" value="2"><label for="q7b">(ب) أضحك وبعدين أساعده.</label>
+                        <input type="radio" id="q7c" name="q7" value="3"><label for="q7c">(ج) أضحك وأمشي.</label>
+                        <input type="radio" id="q7d" name="q7" value="4"><label for="q7d">(د) أصوره وأنزلها فيديو مضحك.</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <p class="question-text">8. لما بتدخل مكان زحمة زي الأسانسير، إيه اللي بتعمله؟</p>
+                    <p class="question-text">8. بتفرح لما حد بيكرهه يحصله مشكلة؟</p>
                     <div class="choices">
-                        <input type="radio" id="q8a" name="q8" value="2"><label for="q8a">(أ) بتأكد إني واقف في مكان مريح عشان مأضايقش حد.</label>
-                        <input type="radio" id="q8b" name="q8" value="4"><label for="q8b">(ب) بدخل بسرعة وأزاحم أي حد عشان ألحق مكان لنفسي.</label>
-                        <input type="radio" id="q8c" name="q8" value="1"><label for="q8c">(ج) بدخل بهدوء، ولو لقيت حد كبير أديله مكاني.</label>
-                        <input type="radio" id="q8d" name="q8" value="3"><label for="q8d">(د) بقف في مكان ضيق وبحاول أوسع مكاني على حساب الناس.</label>
+                        <input type="radio" id="q8a" name="q8" value="1"><label for="q8a">(أ) لأ طبعاً، بزعل عليه.</label>
+                        <input type="radio" id="q8b" name="q8" value="2"><label for="q8b">(ب) مش بهتم.</label>
+                        <input type="radio" id="q8c" name="q8" value="3"><label for="q8c">(ج) بفرح شوية بيني وبين نفسي.</label>
+                        <input type="radio" id="q8d" name="q8" value="4"><label for="q8d">(د) بحتفل بالموضوع.</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <p class="question-text">9. لو بتفرج على فيلم، إيه أكتر شخصية بتشدك؟</p>
+                    <p class="question-text">9. لو معاك سر خطير عن حد، هتعمل بيه إيه؟</p>
                     <div class="choices">
-                        <input type="radio" id="q9a" name="q9" value="1"><label for="q9a">(أ) البطل اللي بيضحي بكل حاجة عشان ينقذ الناس.</label>
-                        <input type="radio" id="q9b" name="q9" value="4"><label for="q9b">(ب) الشرير الذكي اللي بيخطط لكل حاجة بعبقرية.</label>
-                        <input type="radio" id="q9c" name="q9" value="2"><label for="q9c">(ج) الشخصية المضحكة اللي بتهزر طول الوقت.</label>
-                        <input type="radio" id="q9d" name="q9" value="3"><label for="q9d">(د) الشخصية اللي بتتلاعب بالجميع وبتطلع كسبانة في الآخر.</label>
+                        <input type="radio" id="q9a" name="q9" value="1"><label for="q9a">(أ) هحافظ عليه للأبد.</label>
+                        <input type="radio" id="q9b" name="q9" value="2"><label for="q9b">(ب) هقوله لواحد بس ثقة.</label>
+                        <input type="radio" id="q9c" name="q9" value="3"><label for="q9c">(ج) هستخدمه لو احتجت أهدده.</label>
+                        <input type="radio" id="q9d" name="q9" value="4"><label for="q9d">(د) هفضحه بيه فوراً.</label>
                     </div>
                 </div>
                 <div class="question-block">
-                    <p class="question-text">10. لما حد بيحكي لك عن مشكلة كبيرة حصلتله، إيه رد فعل قلبك الأول؟</p>
+                    <p class="question-text">10. إيه شعورك تجاه كلمة "انتقام"؟</p>
                     <div class="choices">
-                        <input type="radio" id="q10a" name="q10" value="1"><label for="q10a">(أ) بشعر بالحزن الشديد والتعاطف وبحاول أساعده.</label>
-                        <input type="radio" id="q10b" name="q10" value="2"><label for="q10b">(ب) بحس إنه ممكن يكون بالغ في رد الفعل، وبتصرف بحيادية.</label>
-                        <input type="radio" id="q10c" name="q10" value="3"><label for="q10c">(ج) بحس بفرحة خفيفة لأني مش أنا اللي في الموقف ده.</label>
-                        <input type="radio" id="q10d" name="q10" value="4"><label for="q10d">(د) بفكر إزاي ممكن أستفيد أنا من فشل الشخص ده.</label>
+                        <input type="radio" id="q10a" name="q10" value="1"><label for="q10a">(أ) المسامح كريم.</label>
+                        <input type="radio" id="q10b" name="q10" value="2"><label for="q10b">(ب) حقك لازم يرجع بس بالأدب.</label>
+                        <input type="radio" id="q10c" name="q10" value="3"><label for="q10c">(ج) الانتقام وجبة تؤكل باردة.</label>
+                        <input type="radio" id="q10d" name="q10" value="4"><label for="q10d">(د) حياتي كلها انتقام.</label>
                     </div>
                 </div>
-                <button type="submit" class="glass-button">اكتشف نسبة الشر!</button>
+                <button type="submit" class="glass-button">وريني نسبة الشر!</button>
             </form>
         </div>
-
-        <!-- ▼▼▼ حاوية النتيجة الجديدة ▼▼▼ -->
         <div id="result-content" class="test-container result-container hidden">
-            <h1 id="result-title" class="result-title">النتيجة النهائية</h1>
+            <h1 id="result-title" class="result-title">النتيجة</h1>
             <div id="result-emoji" class="result-emoji">🤔</div>
-            <p id="result-description" class="result-description">هنا سيتم عرض نص النتيجة.</p>
+            <p id="result-description" class="result-description"></p>
             <p id="result-score" class="result-score"></p>
-            
-            <button id="share-btn" class="glass-button" style="background-color: #4CAF50; margin-bottom: 15px;">
-                شارك مع صحابك واعرف شخصيتهم
-            </button>
-            
-            <a href="index.html" class="glass-button">العب اختبار تاني</a>
+            <button id="share-btn" class="glass-button" style="background-color: #4CAF50;">شارك النتيجة</button>
+            <a href="index.html" class="glass-button">اختبار تاني</a>
         </div>
-        <!-- ▲▲▲ نهاية حاوية النتيجة الجديدة ▲▲▲ -->
     </div>
-
-    <!-- مكتبة المؤثرات السحرية (particles.js) -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
-    <!-- ▼▼▼ كود JavaScript الجديد ▼▼▼ -->
     <script>
-        // --- JavaScript لتشغيل المؤثرات السحرية ---
         particlesJS('particles-js', {
             "particles": {
-                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#f44336" }, // لون الجزيئات أحمر
+                "number": { "value": 60 },
+                "color": { "value": "#f44336" },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.4, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
-                "size": { "value": 3, "random": true },
+                "opacity": { "value": 0.5 },
+                "size": { "value": 3 },
                 "line_linked": { "enable": false },
-                "move": { "enable": true, "speed": 0.6, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
-            },
-            "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" } },
-                "modes": { "repulse": { "distance": 60, "duration": 0.4 } }
-            },
-            "retina_detect": true
+                "move": { "enable": true, "speed": 1 }
+            }
         });
-
-        // --- JavaScript لمنطق الاختبار والمشاركة ---
-
-        // --- المتغيرات الأساسية ---
-        const testForm = document.getElementById('evil-test-form');
-        const testContent = document.getElementById('test-content');
-        const resultContent = document.getElementById('result-content');
+        const form = document.getElementById('evil-test-form');
         const shareBtn = document.getElementById('share-btn');
-        let finalResultText = ''; // متغير لتخزين نص النتيجة للمشاركة
-
-        // --- عند الضغط على "إظهار النتيجة" ---
-        testForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            let totalScore = 0;
-            const totalQuestions = 10;
-            const formData = new FormData(testForm);
-            const answeredQuestions = Array.from(formData.keys()).length;
-
-            if (answeredQuestions < totalQuestions) {
-                alert(`جاوب على كل الأسئلة يا شرير! فاضل لك ${totalQuestions - answeredQuestions} سؤال.`);
-                return;
-            }
-
-            for (let value of formData.values()) {
-                totalScore += parseInt(value, 10);
-            }
-            
-            let result = {};
-            const resultsData = [
-                { min: 10, max: 14, title: "خيري جدًا", emoji: "😇", desc: "نسبة الشر: 0-29%" },
-                { min: 15, max: 19, title: "خفيف الشر", emoji: "😅", desc: "نسبة الشر: 30-44%" },
-                { min: 20, max: 25, title: "شر قليل", emoji: "🙂", desc: "نسبة الشر: 45-59%" },
-                { min: 26, max: 30, title: "شر متوسط", emoji: "🤔", desc: "نسبة الشر: 60-74%" },
-                { min: 31, max: 35, title: "شرير عالي", emoji: "😏", desc: "نسبة الشر: 75-89%" },
-                { min: 36, max: 40, title: "شرير جدًا", emoji: "😈", desc: "نسبة الشر: 90-100%" }
-            ];
-            for(const res of resultsData) {
-                if (totalScore >= res.min && totalScore <= res.max) {
-                    result = res;
-                    break;
-                }
-            }
-
-            // --- تجهيز رسالة المشاركة ---
-            finalResultText = `😈 نتيجتي في اختبار الشر هي: "${result.title}" (${result.desc}) ${result.emoji}. ادخل شوف شخصيتك انت كمان!`;
-
-            // --- عرض النتيجة النهائية ---
-            showResult(result.title, result.emoji, result.desc, totalScore);
+        let finalResultText = '';
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const data = new FormData(form);
+            if (Array.from(data.keys()).length < 10) { alert('جاوب على كل الأسئلة!'); return; }
+            let score = 0;
+            for (let v of data.values()) score += parseInt(v);
+            let res = {};
+            if (score <= 14) res = { title: "خيري جدًا", emoji: "😇" };
+            else if (score <= 19) res = { title: "خفيف الشر", emoji: "😅" };
+            else if (score <= 25) res = { title: "شر قليل", emoji: "🙂" };
+            else if (score <= 30) res = { title: "شر متوسط", emoji: "🤔" };
+            else if (score <= 35) res = { title: "شرير عالي", emoji: "😏" };
+            else res = { title: "شرير جدًا", emoji: "😈" };
+            document.getElementById('result-title').textContent = res.title;
+            document.getElementById('result-emoji').textContent = res.emoji;
+            document.getElementById('result-description').textContent = `نسبة الشر عندك بناءً على إجاباتك هي فئة: ${res.title}`;
+            document.getElementById('result-score').textContent = `نقاطك: ${score}`;
+            document.getElementById('test-content').classList.add('hidden');
+            document.getElementById('result-content').classList.remove('hidden');
+            finalResultText = `😈 نتيجتي في اختبار الشر هي: "${res.title}" ${res.emoji}. ادخل شوف شرك قد إيه!`;
+            window.scrollTo(0,0);
         });
-
-        // --- دالة إظهار النتيجة ---
-        function showResult(title, emoji, description, score) {
-            document.getElementById('result-title').textContent = title;
-            document.getElementById('result-emoji').textContent = emoji;
-            document.getElementById('result-description').textContent = description;
-            document.getElementById('result-score').textContent = `مجموع نقاطك: ${score}`;
-            testContent.classList.add('hidden');
-            resultContent.classList.remove('hidden');
-        }
-
-                // --- عند الضغط على زر "المشاركة" ---
         shareBtn.addEventListener('click', async () => {
-            const shareData = {
-                title: 'اعرف شخصيتك مع xozero!',
-                text: finalResultText,
-                url: 'https://xozero010-dot.github.io/xozero-app/'
-            };
-
-            if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
-                try {
-                    await navigator.share(shareData);
-                } catch (error) {
-                    if (error.name !== 'AbortError') {
-                        copyToClipboard(shareData.url);
-                    }
-                }
-            } else {
-                copyToClipboard(shareData.url);
-            }
+            const url = 'https://xozero010-dot.github.io/xozero-app/';
+            if (navigator.share) {
+                try { await navigator.share({ title: 'اختبار الشر', text: finalResultText, url: url }); }
+                catch (e) { copyToClipboard(url); }
+            } else { copyToClipboard(url); }
         });
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert('تم نسخ رابط الموقع بنجاح! يمكنك الآن مشاركته مع أصدقائك.');
-            }).catch(err => {
-                const textArea = document.createElement("textarea");
-                textArea.value = text;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    alert('تم نسخ رابط الموقع بنجاح!');
-                } catch (err) {
-                    alert('الرابط هو: ' + text);
-                }
-                document.body.removeChild(textArea);
-            });
+        function copyToClipboard(t) {
+            navigator.clipboard.writeText(t).then(() => alert('تم نسخ الرابط!')).catch(() => alert('الرابط: ' + t));
         }
     </script>
-    <!-- ▲▲▲ نهاية كود JavaScript الجديد ▲▲▲ -->
-
-    
-    
-    
-    
-
-    
-
-    
-
-    
-
 </body>
 </html>
